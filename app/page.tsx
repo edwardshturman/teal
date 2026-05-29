@@ -24,12 +24,19 @@ async function getTimeline() {
   const timeline = await client.users.getTimeline(me.data.id, {
     maxResults: 10,
     tweetFields: ["created_at", "author_id", "text", "public_metrics"],
+    expansions: ["author_id"],
+    userFields: ["name", "username"],
     exclude: ["retweets"]
   })
 
   if (!timeline.data) {
     throw new Error("Failed to fetch timeline")
   }
+
+  const users = timeline.includes?.users ?? []
+  const authorsById = new Map(
+    users.map((u) => [u.id, { name: u.name, username: u.username }])
+  )
 
   return timeline.data.map((tweet) => {
     const t = tweet as Record<string, unknown>
@@ -38,6 +45,7 @@ async function getTimeline() {
       id: t.id as string,
       text: t.text as string,
       createdAt: t.createdAt as string,
+      author: authorsById.get(t.authorId as string) ?? null,
       likes: metrics?.likeCount ?? 0,
       retweets: metrics?.retweetCount ?? 0,
       replies: metrics?.replyCount ?? 0

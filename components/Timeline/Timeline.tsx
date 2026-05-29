@@ -7,6 +7,7 @@ type Tweet = {
   id: string
   text: string
   createdAt: string
+  author: { name: string; username: string } | null
   likes: number
   retweets: number
   replies: number
@@ -39,6 +40,12 @@ export function Timeline({ tweets }: { tweets: Tweet[] }) {
   return (
     <div className="flex flex-col gap-4">
       <div className="rounded-lg border p-4">
+        {tweet.author && (
+          <div className="mb-2 flex gap-2 text-sm">
+            <span className="font-semibold">{tweet.author.name}</span>
+            <span className="text-zinc-500">@{tweet.author.username}</span>
+          </div>
+        )}
         <p className="whitespace-pre-wrap">{tweet.text}</p>
         <div className="mt-3 flex gap-4 text-sm text-zinc-500">
           <span>{new Date(tweet.createdAt).toLocaleString()}</span>
