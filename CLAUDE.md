@@ -39,3 +39,7 @@ This project (named Teal, for the moment) is a minimalist, paginated Twitter tim
 
 - When being asked a question, do not make any changes unless instructed to
 - When the user uses language like "isn't it the case that (...)?", do not blindly accept the proposition. They are simply asking you a question. Assess the truthfulness of their premises & soundness of any arguments, and ultimately, answer the question
+
+### Working with the X (Twitter) API
+
+- When reasoning about X API behavior, reference the official X docs — not the `@xdevplatform/xdk` SDK source. Entry points: https://docs.x.com/llms.txt and https://docs.x.com/x-api/llms.txt (append `.md` to any docs.x.com URL for Markdown). The SDK's generated type comments can be inaccurate or ambiguous; the docs are authoritative for endpoints, query parameters, and response shapes. Inspecting the SDK is fine for how _it_ serializes a request, but API behavior claims should come from the docs.
