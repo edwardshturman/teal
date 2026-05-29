@@ -1,13 +1,23 @@
 "use client"
 
+import Image from "next/image"
 import { useEffect, useState } from "react"
 import { Drawer } from "@base-ui/react/drawer"
+
+type Media = {
+  type: string
+  src: string
+  width: number
+  height: number
+  alt: string
+}
 
 type Tweet = {
   id: string
   text: string
   createdAt: string
   author: { name: string; username: string } | null
+  media: Media[]
   likes: number
   retweets: number
   replies: number
@@ -47,6 +57,22 @@ export function Timeline({ tweets }: { tweets: Tweet[] }) {
           </div>
         )}
         <p className="whitespace-pre-wrap">{tweet.text}</p>
+        {tweet.media.length > 0 && (
+          <div
+            className={`mt-3 grid gap-2 ${tweet.media.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}
+          >
+            {tweet.media.map((m) => (
+              <Image
+                key={m.src}
+                src={m.src}
+                alt={m.alt}
+                width={m.width}
+                height={m.height}
+                className="h-auto w-full rounded-md border"
+              />
+            ))}
+          </div>
+        )}
         <div className="mt-3 flex gap-4 text-sm text-zinc-500">
           <span>{new Date(tweet.createdAt).toLocaleString()}</span>
           <span>{tweet.likes} likes</span>
