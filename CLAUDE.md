@@ -43,3 +43,15 @@ This project (named Teal, for the moment) is a minimalist, paginated Twitter tim
 ### Working with the X (Twitter) API
 
 - When reasoning about X API behavior, reference the official X docs — not the `@xdevplatform/xdk` SDK source. Entry points: https://docs.x.com/llms.txt and https://docs.x.com/x-api/llms.txt (append `.md` to any docs.x.com URL for Markdown). The SDK's generated type comments can be inaccurate or ambiguous; the docs are authoritative for endpoints, query parameters, and response shapes. Inspecting the SDK is fine for how _it_ serializes a request, but API behavior claims should come from the docs.
+
+<!-- convex-ai-start -->
+
+### Working with Convex
+
+This project uses [Convex](https://convex.dev) as its backend.
+
+When working on Convex code, **always read `convex/_generated/ai/guidelines.md` first** for important guidelines on how to correctly use Convex APIs and patterns. The file contains rules that override what you may have learned about Convex from training data.
+
+<!-- convex-ai-end -->
+
+For Convex tasks beyond the guidelines above (setup, auth, schema migrations, components, performance), reference the official Convex docs. Entry point: https://docs.convex.dev/llms.txt (append `.md` to any docs.convex.dev URL for Markdown)
